@@ -16,10 +16,10 @@ const LED1 = "Network['4_Xtalk_Historia'].element.Buttons.led1";
 const LED2 = "Network['4_Xtalk_Historia'].element.Buttons2.led1";
 const LED3 = "Network['4_Xtalk_Historia'].element.Buttons2.led2";
 const LED4 = "Network['4_Xtalk_Historia'].element.Buttons2.led4";
-const ROTARY1 = "Network['4_Xtalk_Historia'].element.Rotary1";
-const ROTARY2 = "Network['4_Xtalk_Historia'].element.Rotary2";
-const ROTARY3 = "Network['4_Xtalk_Historia'].element.Rotary3";
-const ROTARY4 = "Network['4_Xtalk_Historia'].element.Rotary4";
+const ROTARY1 = "Network['4_Xtalk_Historia'].element.Rotary1.rotation";
+const ROTARY2 = "Network['4_Xtalk_Historia'].element.Rotary2.rotation";
+const ROTARY3 = "Network['4_Xtalk_Historia'].element.Rotary3.rotation";
+const ROTARY4 = "Network['4_Xtalk_Historia'].element.Rotary4.rotation";
 
 
 export class HistoriaController extends Script {

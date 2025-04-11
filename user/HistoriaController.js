@@ -34,10 +34,10 @@ define(["require", "exports", "system_lib/Script", "system_lib/Metadata"], funct
     var LED2 = "Network['4_Xtalk_Historia'].element.Buttons2.led1";
     var LED3 = "Network['4_Xtalk_Historia'].element.Buttons2.led2";
     var LED4 = "Network['4_Xtalk_Historia'].element.Buttons2.led4";
-    var ROTARY1 = "Network['4_Xtalk_Historia'].element.Rotary1";
-    var ROTARY2 = "Network['4_Xtalk_Historia'].element.Rotary2";
-    var ROTARY3 = "Network['4_Xtalk_Historia'].element.Rotary3";
-    var ROTARY4 = "Network['4_Xtalk_Historia'].element.Rotary4";
+    var ROTARY1 = "Network['4_Xtalk_Historia'].element.Rotary1.rotation";
+    var ROTARY2 = "Network['4_Xtalk_Historia'].element.Rotary2.rotation";
+    var ROTARY3 = "Network['4_Xtalk_Historia'].element.Rotary3.rotation";
+    var ROTARY4 = "Network['4_Xtalk_Historia'].element.Rotary4.rotation";
     var HistoriaController = (function (_super) {
         __extends(HistoriaController, _super);
         function HistoriaController(env) {
