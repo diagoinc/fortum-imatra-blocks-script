@@ -26,6 +26,7 @@ const NO_EVENT = '';
 export class HistoriaController extends Script {
 	private _event: string = NO_EVENT;
 	private currentGroup: number | null = null;
+	private awaiter: CancelablePromise<void> | undefined = undefined;
 
 	private led1: PropertyAccessor<number>;
 	private led2: PropertyAccessor<number>;
@@ -62,6 +63,9 @@ export class HistoriaController extends Script {
 	}
 
 	private handleRotation(group: number, value: number) {
+		if (value == 0) {
+			return;
+		}
 		console.log('rotate', group, value);
 		if (this.currentGroup != group) {
 			this.currentGroup = group;
@@ -73,8 +77,14 @@ export class HistoriaController extends Script {
 	private triggerEvent(event: string) {
 		this._event = event;
 		this.changed('event');
-		const awaiter = wait(100);
-		awaiter.then(() => this._event = NO_EVENT);
+		if (this.awaiter) {
+			this.awaiter.cancel();
+		}
+		this.awaiter = wait(100);
+		this.awaiter.then(() => {
+			this._event = NO_EVENT;
+			this.awaiter = undefined;
+		});
 	}
 
 	private setLED(ledNum: number) {

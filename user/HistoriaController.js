@@ -45,6 +45,7 @@ define(["require", "exports", "system_lib/Script", "system_lib/Metadata"], funct
             var _this = _super.call(this, env) || this;
             _this._event = NO_EVENT;
             _this.currentGroup = null;
+            _this.awaiter = undefined;
             _this.led1 = _this.getProperty(LED1);
             _this.led2 = _this.getProperty(LED2);
             _this.led3 = _this.getProperty(LED3);
@@ -73,6 +74,9 @@ define(["require", "exports", "system_lib/Script", "system_lib/Metadata"], funct
             this.triggerEvent('PLAY');
         };
         HistoriaController.prototype.handleRotation = function (group, value) {
+            if (value == 0) {
+                return;
+            }
             console.log('rotate', group, value);
             if (this.currentGroup != group) {
                 this.currentGroup = group;
@@ -84,8 +88,14 @@ define(["require", "exports", "system_lib/Script", "system_lib/Metadata"], funct
             var _this = this;
             this._event = event;
             this.changed('event');
-            var awaiter = wait(100);
-            awaiter.then(function () { return _this._event = NO_EVENT; });
+            if (this.awaiter) {
+                this.awaiter.cancel();
+            }
+            this.awaiter = wait(100);
+            this.awaiter.then(function () {
+                _this._event = NO_EVENT;
+                _this.awaiter = undefined;
+            });
         };
         HistoriaController.prototype.setLED = function (ledNum) {
             this.led1.value = ledNum == 1 ? 3 : 0;
