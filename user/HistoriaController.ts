@@ -67,7 +67,7 @@ export class HistoriaController extends Script {
 			this.currentGroup = group;
 			this.setLED(this.currentGroup);
 		}
-		this.triggerEvent(`GO:${group}:${value}`);
+		this.triggerEvent(`GO:${group - 1}:${value}`);
 	}
 
 	private triggerEvent(event: string) {

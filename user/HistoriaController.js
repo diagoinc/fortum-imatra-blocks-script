@@ -78,7 +78,7 @@ define(["require", "exports", "system_lib/Script", "system_lib/Metadata"], funct
                 this.currentGroup = group;
                 this.setLED(this.currentGroup);
             }
-            this.triggerEvent("GO:".concat(group, ":").concat(value));
+            this.triggerEvent("GO:".concat(group - 1, ":").concat(value));
         };
         HistoriaController.prototype.triggerEvent = function (event) {
             var _this = this;
