@@ -21,10 +21,11 @@ const ROTARY2 = "Network['4_Xtalk_Historia'].element.Rotary2.rotation";
 const ROTARY3 = "Network['4_Xtalk_Historia'].element.Rotary3.rotation";
 const ROTARY4 = "Network['4_Xtalk_Historia'].element.Rotary4.rotation";
 
+const NO_EVENT = '';
 
 export class HistoriaController extends Script {
-	private _event: string = '';
-	private _currentGroup: number | null = null;
+	private _event: string = NO_EVENT;
+	private currentGroup: number | null = null;
 
 	private led1: PropertyAccessor<number>;
 	private led2: PropertyAccessor<number>;
@@ -43,11 +44,43 @@ export class HistoriaController extends Script {
 		this.led2 = this.getProperty(LED2);
 		this.led3 = this.getProperty(LED3);
 		this.led4 = this.getProperty(LED4);
-		this.getProperty(BUTTON1, (value) => console.log(value));
-		this.getProperty(BUTTON2, (value) => console.log(value));
-		this.getProperty(BUTTON3, (value) => console.log(value));
-		this.getProperty(BUTTON4, (value) => console.log(value));
-		this.getProperty(ROTARY1, (value) => console.log(value));
-		this.getProperty(ROTARY4, (value) => console.log(value));
+		this.getProperty(BUTTON1, (value: boolean) => this.handleButton(1, value));
+		this.getProperty(BUTTON2, (value: boolean) => this.handleButton(2, value));
+		this.getProperty(BUTTON3, (value: boolean) => this.handleButton(3, value));
+		this.getProperty(BUTTON4, (value: boolean) => this.handleButton(4, value));
+		this.getProperty(ROTARY1, (value: number) => this.handleRotation(1, value));
+		this.getProperty(ROTARY2, (value: number) => this.handleRotation(2, value));
+		this.getProperty(ROTARY3, (value: number) => this.handleRotation(3, value));
+		this.getProperty(ROTARY4, (value: number) => this.handleRotation(4, value));
+	}
+
+	private handleButton(group: number, value: boolean) {
+		if (!value || this.currentGroup != group) {
+			return;
+		}
+		this.triggerEvent('PLAY');
+	}
+
+	private handleRotation(group: number, value: number) {
+		console.log('rotate', group, value);
+		if (this.currentGroup != group) {
+			this.currentGroup = group;
+			this.setLED(this.currentGroup);
+		}
+		this.triggerEvent(`GO:${group}:${value}`);
+	}
+
+	private triggerEvent(event: string) {
+		this._event = event;
+		this.changed('event');
+		const awaiter = wait(100);
+		awaiter.then(() => this._event = NO_EVENT);
+	}
+
+	private setLED(ledNum: number) {
+		this.led1.value = ledNum == 1 ? 3 : 0;
+		this.led2.value = ledNum == 2 ? 3 : 0;
+		this.led3.value = ledNum == 3 ? 3 : 0;
+		this.led4.value = ledNum == 4 ? 3 : 0;
 	}
 }

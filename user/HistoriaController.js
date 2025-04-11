@@ -38,22 +38,25 @@ define(["require", "exports", "system_lib/Script", "system_lib/Metadata"], funct
     var ROTARY2 = "Network['4_Xtalk_Historia'].element.Rotary2.rotation";
     var ROTARY3 = "Network['4_Xtalk_Historia'].element.Rotary3.rotation";
     var ROTARY4 = "Network['4_Xtalk_Historia'].element.Rotary4.rotation";
+    var NO_EVENT = '';
     var HistoriaController = (function (_super) {
         __extends(HistoriaController, _super);
         function HistoriaController(env) {
             var _this = _super.call(this, env) || this;
-            _this._event = '';
-            _this._currentGroup = null;
+            _this._event = NO_EVENT;
+            _this.currentGroup = null;
             _this.led1 = _this.getProperty(LED1);
             _this.led2 = _this.getProperty(LED2);
             _this.led3 = _this.getProperty(LED3);
             _this.led4 = _this.getProperty(LED4);
-            _this.getProperty(BUTTON1, function (value) { return console.log(value); });
-            _this.getProperty(BUTTON2, function (value) { return console.log(value); });
-            _this.getProperty(BUTTON3, function (value) { return console.log(value); });
-            _this.getProperty(BUTTON4, function (value) { return console.log(value); });
-            _this.getProperty(ROTARY1, function (value) { return console.log(value); });
-            _this.getProperty(ROTARY4, function (value) { return console.log(value); });
+            _this.getProperty(BUTTON1, function (value) { return _this.handleButton(1, value); });
+            _this.getProperty(BUTTON2, function (value) { return _this.handleButton(2, value); });
+            _this.getProperty(BUTTON3, function (value) { return _this.handleButton(3, value); });
+            _this.getProperty(BUTTON4, function (value) { return _this.handleButton(4, value); });
+            _this.getProperty(ROTARY1, function (value) { return _this.handleRotation(1, value); });
+            _this.getProperty(ROTARY2, function (value) { return _this.handleRotation(2, value); });
+            _this.getProperty(ROTARY3, function (value) { return _this.handleRotation(3, value); });
+            _this.getProperty(ROTARY4, function (value) { return _this.handleRotation(4, value); });
             return _this;
         }
         Object.defineProperty(HistoriaController.prototype, "event", {
@@ -63,6 +66,33 @@ define(["require", "exports", "system_lib/Script", "system_lib/Metadata"], funct
             enumerable: false,
             configurable: true
         });
+        HistoriaController.prototype.handleButton = function (group, value) {
+            if (!value || this.currentGroup != group) {
+                return;
+            }
+            this.triggerEvent('PLAY');
+        };
+        HistoriaController.prototype.handleRotation = function (group, value) {
+            console.log('rotate', group, value);
+            if (this.currentGroup != group) {
+                this.currentGroup = group;
+                this.setLED(this.currentGroup);
+            }
+            this.triggerEvent("GO:".concat(group, ":").concat(value));
+        };
+        HistoriaController.prototype.triggerEvent = function (event) {
+            var _this = this;
+            this._event = event;
+            this.changed('event');
+            var awaiter = wait(100);
+            awaiter.then(function () { return _this._event = NO_EVENT; });
+        };
+        HistoriaController.prototype.setLED = function (ledNum) {
+            this.led1.value = ledNum == 1 ? 3 : 0;
+            this.led2.value = ledNum == 2 ? 3 : 0;
+            this.led3.value = ledNum == 3 ? 3 : 0;
+            this.led4.value = ledNum == 4 ? 3 : 0;
+        };
         __decorate([
             (0, Metadata_1.property)('Event', true),
             __metadata("design:type", String),
