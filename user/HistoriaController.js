@@ -25,7 +25,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 define(["require", "exports", "system_lib/Script", "system_lib/Metadata"], function (require, exports, Script_1, Metadata_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.SahkontuotantoController = void 0;
+    exports.HistoriaController = void 0;
     var BUTTON1 = "Network['4_Xtalk_Historia'].element.Buttons.button1";
     var BUTTON2 = "Network['4_Xtalk_Historia'].element.Buttons2.button1";
     var BUTTON3 = "Network['4_Xtalk_Historia'].element.Buttons2.button2";
@@ -38,9 +38,9 @@ define(["require", "exports", "system_lib/Script", "system_lib/Metadata"], funct
     var ROTARY2 = "Network['4_Xtalk_Historia'].element.Rotary2";
     var ROTARY3 = "Network['4_Xtalk_Historia'].element.Rotary3";
     var ROTARY4 = "Network['4_Xtalk_Historia'].element.Rotary4";
-    var SahkontuotantoController = (function (_super) {
-        __extends(SahkontuotantoController, _super);
-        function SahkontuotantoController(env) {
+    var HistoriaController = (function (_super) {
+        __extends(HistoriaController, _super);
+        function HistoriaController(env) {
             var _this = _super.call(this, env) || this;
             _this._event = '';
             _this._currentGroup = null;
@@ -56,7 +56,7 @@ define(["require", "exports", "system_lib/Script", "system_lib/Metadata"], funct
             _this.getProperty(ROTARY4, function (value) { return console.log(value); });
             return _this;
         }
-        Object.defineProperty(SahkontuotantoController.prototype, "event", {
+        Object.defineProperty(HistoriaController.prototype, "event", {
             get: function () {
                 return this._event;
             },
@@ -67,8 +67,8 @@ define(["require", "exports", "system_lib/Script", "system_lib/Metadata"], funct
             (0, Metadata_1.property)('Event', true),
             __metadata("design:type", String),
             __metadata("design:paramtypes", [])
-        ], SahkontuotantoController.prototype, "event", null);
-        return SahkontuotantoController;
+        ], HistoriaController.prototype, "event", null);
+        return HistoriaController;
     }(Script_1.Script));
-    exports.SahkontuotantoController = SahkontuotantoController;
+    exports.HistoriaController = HistoriaController;
 });

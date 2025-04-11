@@ -22,7 +22,7 @@ const ROTARY3 = "Network['4_Xtalk_Historia'].element.Rotary3";
 const ROTARY4 = "Network['4_Xtalk_Historia'].element.Rotary4";
 
 
-export class SahkontuotantoController extends Script {
+export class HistoriaController extends Script {
 	private _event: string = '';
 	private _currentGroup: number | null = null;
 
