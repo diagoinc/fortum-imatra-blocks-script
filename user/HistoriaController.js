@@ -67,6 +67,15 @@ define(["require", "exports", "system_lib/Script", "system_lib/Metadata"], funct
             enumerable: false,
             configurable: true
         });
+        HistoriaController.prototype.restSetIdle = function (input) {
+            var args = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args[_i - 1] = arguments[_i];
+            }
+            this.currentGroup = null;
+            this.setLED(0);
+            return {};
+        };
         HistoriaController.prototype.handleButton = function (group, value) {
             if (!value || this.currentGroup != group) {
                 return;
@@ -108,6 +117,12 @@ define(["require", "exports", "system_lib/Script", "system_lib/Metadata"], funct
             __metadata("design:type", String),
             __metadata("design:paramtypes", [])
         ], HistoriaController.prototype, "event", null);
+        __decorate([
+            (0, Metadata_1.resource)(),
+            __metadata("design:type", Function),
+            __metadata("design:paramtypes", [Object, Object]),
+            __metadata("design:returntype", Object)
+        ], HistoriaController.prototype, "restSetIdle", null);
         return HistoriaController;
     }(Script_1.Script));
     exports.HistoriaController = HistoriaController;

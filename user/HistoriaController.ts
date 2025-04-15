@@ -6,7 +6,7 @@
 import {PropertyAccessor, Script, ScriptEnv} from 'system_lib/Script';
 import {PrimitiveValue} from 'system_lib/ScriptBase';
 import {Network} from 'system/Network';
-import {property} from 'system_lib/Metadata';
+import {property, resource} from 'system_lib/Metadata';
 
 const BUTTON1 = "Network['4_Xtalk_Historia'].element.Buttons.button1";
 const BUTTON2 = "Network['4_Xtalk_Historia'].element.Buttons2.button1";
@@ -36,6 +36,13 @@ export class HistoriaController extends Script {
 	@property('Event', true)
 	public get event(): string {
 		return this._event;
+	}
+
+	@resource()
+	public restSetIdle(input: any, ...args: any[]): any {
+		this.currentGroup = null;
+		this.setLED(0);
+		return {};
 	}
 
 	public constructor(env: ScriptEnv) {
