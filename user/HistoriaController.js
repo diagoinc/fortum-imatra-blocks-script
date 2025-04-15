@@ -72,6 +72,8 @@ define(["require", "exports", "system_lib/Script", "system_lib/Metadata"], funct
             for (var _i = 0; _i < arguments.length; _i++) {
                 args[_i] = arguments[_i];
             }
+            this.currentGroup = null;
+            this.setLED(0);
             return {};
         };
         HistoriaController.prototype.handleButton = function (group, value) {
@@ -116,7 +118,7 @@ define(["require", "exports", "system_lib/Script", "system_lib/Metadata"], funct
             __metadata("design:paramtypes", [])
         ], HistoriaController.prototype, "event", null);
         __decorate([
-            (0, Metadata_1.resource)(undefined, 'GET'),
+            (0, Metadata_1.resource)(undefined, 'POST'),
             __metadata("design:type", Function),
             __metadata("design:paramtypes", [Object]),
             __metadata("design:returntype", Object)
