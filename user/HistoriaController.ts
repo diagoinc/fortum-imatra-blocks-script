@@ -39,7 +39,7 @@ export class HistoriaController extends Script {
 	}
 
 	@resource(undefined, 'GET')
-	public restSetIdle(input: any, ...args: any[]): any {
+	public restSetIdle(...args: any[]): any {
 		// this.currentGroup = null;
 		// this.setLED(0);
 		return {};

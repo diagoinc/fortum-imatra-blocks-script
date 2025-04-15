@@ -67,10 +67,10 @@ define(["require", "exports", "system_lib/Script", "system_lib/Metadata"], funct
             enumerable: false,
             configurable: true
         });
-        HistoriaController.prototype.restSetIdle = function (input) {
+        HistoriaController.prototype.restSetIdle = function () {
             var args = [];
-            for (var _i = 1; _i < arguments.length; _i++) {
-                args[_i - 1] = arguments[_i];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                args[_i] = arguments[_i];
             }
             return {};
         };
@@ -118,7 +118,7 @@ define(["require", "exports", "system_lib/Script", "system_lib/Metadata"], funct
         __decorate([
             (0, Metadata_1.resource)(undefined, 'GET'),
             __metadata("design:type", Function),
-            __metadata("design:paramtypes", [Object, Object]),
+            __metadata("design:paramtypes", [Object]),
             __metadata("design:returntype", Object)
         ], HistoriaController.prototype, "restSetIdle", null);
         return HistoriaController;
